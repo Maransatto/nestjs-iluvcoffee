@@ -97,3 +97,32 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Migrations
+
+### Create a Migration File
+
+```bash
+npx typeorm migration:create src/migrations/CoffeeRefactor
+```
+
+### Run Migration
+
+```bash
+yarn build # to updatet the dist folter
+npx typeorm migration:run -d dist/typeorm-cli.config
+```
+
+### Revert Migration
+
+```bash
+npx typeorm migration:revert -d dist/typeorm-cli.config
+```
+
+### Generate Migration
+
+First, we need to add the entities to the array in the DataSource on the `typeorm-cli.config.ts` file.
+
+```bash
+npx typeorm migration:generate src/migrations/SchemaSync -d dist/typeorm-cli.config
+```
