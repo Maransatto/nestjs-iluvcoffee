@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Scope } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { COFFEES_BRANDS } from './coffees.constants';
@@ -14,12 +14,8 @@ import { Flavor } from './entities/flavor.entity';
     CoffeesService,
     {
       provide: COFFEES_BRANDS,
-      useFactory: async (connection: Connection): Promise<string[]> => {
-        // const coffeeBrands = await connection.query('SELECT * ...');
-        const coffeeBrands = await Promise.resolve(['buddy brew', 'nescafe']);
-        console.log('[!] Async factory');
-        return coffeeBrands;
-      },
+      useFactory: () => ['buddy brew', 'nescafe'],
+      scope: Scope.TRANSIENT,
     },
   ],
   exports: [CoffeesService],
