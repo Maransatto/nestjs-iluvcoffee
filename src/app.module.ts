@@ -10,6 +10,19 @@ import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRootAsync({
+      // this will now be loaded after all the application bootsprapped is loaded
+      useFactory: () => ({
+        type: 'postgres',
+        host: process.env.DATABASE_HOST,
+        port: +process.env.DATABASE_PORT,
+        username: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+    }),
     ConfigModule.forRoot({
       // envFilePath: '.environment', // specify the .env file name
       // ignoreEnvFile: true, // ignore .env files
@@ -20,16 +33,7 @@ import { DatabaseModule } from './database/database.module';
       load: [appConfig],
     }),
     CoffeesModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DATABASE_HOST,
-      port: +process.env.DATABASE_PORT,
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+
     CoffeeRatingModule,
     DatabaseModule,
   ],
