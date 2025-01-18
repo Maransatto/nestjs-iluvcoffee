@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
+import { DatabaseModule } from './database/database.module';
 
 const ORM_OPTIONS: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -17,7 +18,7 @@ const ORM_OPTIONS: TypeOrmModuleOptions = {
 };
 
 @Module({
-  imports: [CoffeesModule, TypeOrmModule.forRoot(ORM_OPTIONS), CoffeeRatingModule],
+  imports: [CoffeesModule, TypeOrmModule.forRoot(ORM_OPTIONS), CoffeeRatingModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })
