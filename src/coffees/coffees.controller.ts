@@ -24,7 +24,7 @@ export class CoffeesController {
     private readonly coffeesService: CoffeesService,
     @Inject(REQUEST) private readonly request: Request,
   ) {
-    console.log('CoffeesController created');
+    // console.log('CoffeesController created');
   }
 
   // @UsePipes(ValidationPipe)
