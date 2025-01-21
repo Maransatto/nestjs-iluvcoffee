@@ -11,7 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
-import { ApiForbiddenResponse } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
@@ -20,6 +20,7 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 // @UsePipes(ValidationPipe)
+@ApiTags('coffees')
 @Controller('coffees')
 export class CoffeesController {
   constructor(
@@ -31,9 +32,8 @@ export class CoffeesController {
 
   // @UsePipes(ValidationPipe)
   // @SetMetadata('isPublic', true)
-
   // @ApiResponse({ status: 403, description: 'Forbidden.' }) // @ApiForbiddenResponse is an alternative for this example
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
+  // @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Public()
   @Get()
   async findAll(
